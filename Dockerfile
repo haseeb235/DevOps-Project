@@ -1,3 +1,4 @@
+# Docker configuration for proper image installation
 # Pull official base image
 FROM node:17-alpine as build-deps
 
