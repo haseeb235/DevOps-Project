@@ -1,0 +1,54 @@
+rules:
+  - id: insecure-logging-password
+    patterns:
+      - pattern: |
+          console.log($argument)
+        where: argument.type == "Literal" and argument.raw.contains("password")
+    message: "Insecure logging of passwords"
+    languages:
+      - javascript
+      - typescript
+
+  - id: unused-variable
+    patterns:
+      - pattern: |
+          var $variable = $value;
+          // No references to $variable in the code
+        where: variable.references.length == 0
+    message: "Unused variable detected"
+    languages:
+      - javascript
+      - typescript
+
+  - id: hardcoded-secret
+    patterns:
+      - pattern: |
+          const $variable = "$secret";
+        where: variable.type == "Literal" and variable.raw.contains("secret")
+    message: "Hardcoded secret detected"
+    languages:
+      - javascript
+      - typescript
+
+  - id: console-log
+    patterns:
+      - pattern: |
+          console.log($argument)
+        where: true
+    message: "Avoid using console.log in production code"
+    languages:
+      - javascript
+      - typescript
+
+  - id: no-alert
+    patterns:
+      - pattern: |
+          alert($message)
+        where: true
+    message: "Avoid using alert in production code"
+    languages:
+      - javascript
+      - typescript
+# static analysis
+# Checking : insecure-logging-password, unused-variable, hardcoded-secret, console-log, no-alert
+
