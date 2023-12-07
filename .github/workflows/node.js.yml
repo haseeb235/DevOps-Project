@@ -1,8 +1,10 @@
 name: build
+
 on:
   push:
     branches:
       - main
+
 jobs:
   build:
     name: Build
@@ -10,19 +12,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
+      - name: Run Semgrep for static analysis
+        run: |
+          pip install semgrep
+          semgrep --config=./semgrep-config.yaml .
+
       - name: Build an image from Dockerfile
         run: |
           docker build -t docker.io/anaisurlichs/react-app:${{ github.sha }} .
-      
+
       - name: Run Trivy vulnerability scanner in repo mode
         uses: aquasecurity/trivy-action@add-support-for-trivy-config
         with:
           trivy-config: ./trivy-config.yaml
-          image-ref: 'docker.io/anaisurlichs/react-app:${{ github.sha }}'
-          format: 'table'
-          exit-code: '1'
+          image-ref: "docker.io/anaisurlichs/react-app:${{ github.sha }}"
+          format: "table"
+          exit-code: "1"
           ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
-          
+          vuln-type: "os,library"
+          severity: "CRITICAL,HIGH"
