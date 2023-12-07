@@ -3,12 +3,12 @@ rules:
     patterns:
       - pattern: |
           console.log($argument)
-        where: argument.type == "Literal" and argument.raw.contains("password")
+    where: $argument.type == "Literal" and $argument.raw.contains("password")
     message: "Insecure logging of passwords"
     languages:
       - javascript
       - typescript
-    severity: "WARNING"
+    severity: "ERROR"
 
   - id: unused-variable
     patterns:
