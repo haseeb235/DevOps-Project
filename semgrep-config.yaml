@@ -8,6 +8,7 @@ rules:
     languages:
       - javascript
       - typescript
+    severity: "WARNING"
 
   - id: unused-variable
     patterns:
@@ -19,6 +20,7 @@ rules:
     languages:
       - javascript
       - typescript
+    severity: "WARNING"
 
   - id: hardcoded-secret
     patterns:
@@ -29,6 +31,7 @@ rules:
     languages:
       - javascript
       - typescript
+    severity: "WARNING"
 
   - id: console-log
     patterns:
@@ -39,6 +42,7 @@ rules:
     languages:
       - javascript
       - typescript
+    severity: "WARNING"
 
   - id: no-alert
     patterns:
@@ -49,6 +53,4 @@ rules:
     languages:
       - javascript
       - typescript
-# static analysis
-# Checking : insecure-logging-password, unused-variable, hardcoded-secret, console-log, no-alert
-
+    severity: "WARNING"
